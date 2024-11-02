@@ -1,4 +1,4 @@
-using Pocket_Travel.Components;
+using PocketTravel.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 

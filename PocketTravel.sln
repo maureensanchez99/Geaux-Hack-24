@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pocket Travel", "Pocket Travel\Pocket Travel.csproj", "{A916E938-9183-4AF1-9484-C3FAD2A0DED5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketTravel", "PocketTravel\PocketTravel.csproj", "{5B9A645A-86E6-47F6-BC26-CDED2AF13777}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A916E938-9183-4AF1-9484-C3FAD2A0DED5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A916E938-9183-4AF1-9484-C3FAD2A0DED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A916E938-9183-4AF1-9484-C3FAD2A0DED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A916E938-9183-4AF1-9484-C3FAD2A0DED5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B9A645A-86E6-47F6-BC26-CDED2AF13777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B9A645A-86E6-47F6-BC26-CDED2AF13777}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B9A645A-86E6-47F6-BC26-CDED2AF13777}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B9A645A-86E6-47F6-BC26-CDED2AF13777}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
