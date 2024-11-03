@@ -6,23 +6,25 @@
 <main>
     <div class="img-header"/>
     <br>
-    <div class="left-block">
-        <div class="suitcase-img"/>
-    </div>
-    <div class="right-block">
-        <p>
-            We're here to assist you in your travels abroad as you
-            explore countries that may be different than the country
-            that you're from!
-        </p>
-    </div>
-    <div class="left-block">
-        <p>
-            Join us as we help prepare and guide you through the local 
-            weather, languages barriers, currency exchange and more that 
-            you can run into while abroad.
-        </p>
-    </div>
+    <div class="grid"> 
+        <div class="left-block">
+            <div class="suitcase-img"/>
+        </div>
+            <div class="right-block">
+                <p>
+                    We're here to assist you in your travels abroad as you
+                    explore countries that may be different than the country
+                    that you're from!
+                </p>
+            </div>
+        </div>
+        <div class="text-section">
+            <p>
+                Join us as we help prepare and guide you through the local 
+                weather, languages barriers, currency exchange and more that 
+                you can run into while abroad.
+            </p>
+        </div>
     <br>
     <div class="rec-cities">
         <h2 class="rec-cities-title">Recommended Cities</h2>
@@ -32,7 +34,6 @@
                 <a href=@country.s_page>
                 <div class="city-img" style="background-image: url('@country.s_cityPath')"/>
             </a>
-            <div class="pin-icon"/>
             <div class="city-name"/>
             }
            
@@ -49,29 +50,39 @@
         height: 300px;
         border-radius: 6px;
     }
+    .grid {
+        display: flex;
+        width: 100%;
+        gap: 20px;
+    }
     .suitcase-img {
-        background-image: url('images/suitcase.png');
-        width: 200px;
-        background-size: fill;
+        background-image: url('images/suitcase.jpg');
+        width: 350px;
+        height: 250px;
+        background-size: cover;
         background-repeat: no-repeat;
         /*float: left;*/
         clear: both;
+        border-radius: 5px;
     }
     .right-block { 
         width: 50%;
         padding: 20px;
         float: right;
-        margin: 30px 30px 30px 30px;
+        margin: 30px 30px 30px 10px;
         border-radius: 5px;
         align-content: center;
     }
     .left-block {
-        width: 50%;
+        width: 48%;
         float: left;
         clear: both;
+        display: flex;
         padding: 20px;
-        margin: 30px 30px 30px 30px;
+        margin: 20px 20px 20px 10px;
         border-radius: 5px;
+        justify-content: center;  
+        align-items: center;
     }
     .rec-cities{
         clear: both;
@@ -95,8 +106,13 @@
         background-image: url('images/pyongyang.jpg');
         margin-bottom: 20px;
     }
-    .pin-icon {
-        <img src: '/images/map-marker.svg';
+    p {
+        font-size: 25px;
+    }
+    .text-section {
+        width:75%;
+        margin: 0 auto;
+        text-content: center;
     }
 </style>
 
