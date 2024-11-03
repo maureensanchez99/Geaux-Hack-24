@@ -1,4 +1,8 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@inject c_currentUser c_currentUser
+
+
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Pocket Travel</a>
     </div>
@@ -20,29 +24,27 @@
             </NavLink>
         </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+        <nav>
+    <div class="nav-item px-3">
+        @if (!c_currentUser.IsLoggedIn)
+        {
+            <NavLink class="nav-link" href="login">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Login
             </NavLink>
-        </div>
+        }
+        else
+        {
+            <span>adwadw</span>
+        }
+    </div>
 
+    @if (c_currentUser.IsLoggedIn)
+    {
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="languages">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Languages
-            </NavLink>
+            <span class="nav-link">Welcome, @c_currentUser.fullName!</span>
         </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="finances">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Finances
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="legaltips">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Legal Tips
-            </NavLink>
-        </div>
+    }
+</nav>
     </nav>
 </div>
 

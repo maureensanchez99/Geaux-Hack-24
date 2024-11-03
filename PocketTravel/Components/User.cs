@@ -9,7 +9,7 @@ public class c_currentUser
 
     public string phoneNumber {get; set;}
 
-    public bool IsLoggedIn { get; set;} = false;
+    public bool IsLoggedIn {get; set;} = false;
 
     public void SetUser(string id,string email, string fullname, string phonenumber, string username)
     {

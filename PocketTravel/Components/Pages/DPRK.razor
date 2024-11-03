@@ -1,5 +1,6 @@
 @page "/dprk"
 @rendermode InteractiveServer
+@using Google.Cloud.Firestore;
 
 <PageTitle>DPRK</PageTitle>
 
@@ -11,7 +12,7 @@
     <div class="right-section">
         <div class="flag-img"/>
     </div>
-</div>
+</div>          
 
 <div class="breakdown">
     <h1 class="bd-title">Breakdown</h1>
@@ -77,5 +78,36 @@
 </style>
 
 @code {
+    FirebaseDb db = FirebaseDb.Create("");
 
+ public class c_countries
+    {
+        public string s_id {get;set;}
+        public string s_flagPath {get;set;}
+        public string s_page {get;set;}
+
+        public string
+
+    }
+    private IEnumerable<c_countries> IE_countries = Array.Empty<c_countries>();
+    
+     protected override async Task OnInitializedAsync()
+    {
+        await refreshList();
+    }
+
+    private async Task refreshList()
+    {
+        CollectionReference cr_countries = db.Collection("Countries");
+        QuerySnapshot qs_countries = await cr_countries.GetSnapshotAsync();
+
+        var lst = new List<c_countries>();
+            foreach (var country in qs_countries.Documents)
+            {
+                lst.Add(new c_countries{s_id = country.Id, s_cityPath = country.GetValue<string>("cityPath"), s_page = country.GetValue<string>("page")});
+            }
+        IE_countries = lst;
+
+    
+    }
 }

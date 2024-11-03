@@ -1,18 +1,20 @@
 @page "/profile"
 @rendermode InteractiveServer
+@inject c_currentUser c_currentUser
 
 <PageTitle>Profile</PageTitle>
 
+
 <main>
-    <h1 class="welcome">Hello User!</h1>
+    <h1 class="welcome">Hello @c_currentUser.UserName!</h1>
     <div class="grid">
         <div class="left-block">
             <div class="section-block">
                 <div class="user-info">
-                    <p>Username:</p>
-                    <p>Full Name:</p>
-                    <p>email:</p>
-                    <p>phone number:</p>
+                    <p>Username: @c_currentUser.UserName</p>
+                    <p>Full Name: @c_currentUser.fullName</p>
+                    <p>Email: @c_currentUser.Email</p>
+                    <p>Phone Number: @c_currentUser.phoneNumber</p>
                 </div>
             </div>
         </div>
@@ -95,6 +97,3 @@
     }
 </style>
 
-@code {
-
-}

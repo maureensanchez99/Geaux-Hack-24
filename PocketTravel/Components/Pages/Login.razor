@@ -53,7 +53,7 @@
                 LoginMessage = "Succesfully Logged In!";
                 DocumentReference dr_User = cr_Users.Document(user.s_id);
                 DocumentSnapshot ds_userData = await dr_User.GetSnapshotAsync();
-                c_currentUser.SetUser(s_Email,s_Password, ds_userData.GetValue<string>("fullName"), ds_userData.GetValue<string>("phoneNumber"));
+                c_currentUser.SetUser(user.s_id, ds_userData.GetValue<string>("email"), ds_userData.GetValue<string>("fullName"), ds_userData.GetValue<string>("phoneNumber"), ds_userData.GetValue<string>("userName"));
                 LoginMessage = "Welcome back, " + c_currentUser.fullName + "!";
                 return;
             }
@@ -65,7 +65,7 @@
 
 
 
-    
+
 
 
 

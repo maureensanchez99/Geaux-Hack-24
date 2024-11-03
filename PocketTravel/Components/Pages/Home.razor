@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Google.Cloud.Firestore
 
 <PageTitle>Home</PageTitle>
 
@@ -26,11 +27,15 @@
     <div class="rec-cities">
         <h2 class="rec-cities-title">Recommended Cities</h2>
         <div class="city">
-            <a href="dprk">
-                <div class="city-img"/>
+            @foreach(var country in IE_countries)
+            {
+                <a href=@country.s_page>
+                <div class="city-img" style="background-image: url('@country.s_cityPath')"/>
             </a>
             <div class="pin-icon"/>
             <div class="city-name"/>
+            }
+           
         </div>
     </div>
     <br>
@@ -96,9 +101,37 @@
 </style>
 
 @code {
-    @*
-        call from database:
-        - city image
-        - city location
-    *@
+    FirestoreDb db = FirestoreDb.Create("pockettravel-68eb7");
+
+
+    public class c_countries
+    {
+        public string s_id {get;set;}
+        public string s_cityPath {get;set;}
+        public string s_page {get;set;}
+
+    }
+    private IEnumerable<c_countries> IE_countries = Array.Empty<c_countries>();
+    
+     protected override async Task OnInitializedAsync()
+    {
+        await refreshList();
+    }
+
+    private async Task refreshList()
+    {
+        CollectionReference cr_countries = db.Collection("Countries");
+        QuerySnapshot qs_countries = await cr_countries.GetSnapshotAsync();
+
+        var lst = new List<c_countries>();
+            foreach (var country in qs_countries.Documents)
+            {
+                lst.Add(new c_countries{s_id = country.Id, s_cityPath = country.GetValue<string>("cityPath"), s_page = country.GetValue<string>("page")});
+            }
+        IE_countries = lst;
+
+    
+    }
+
+
 }
