@@ -1,0 +1,72 @@
+@using Google.Cloud.Firestore;
+@rendermode InteractiveServer
+@inject c_currentUser c_currentUser
+@page "/login"
+
+<h1>Login below!</h1>
+<p>
+     Email: 
+    <input @bind="s_Email"/>&nbsp;
+</p>
+<p>
+    Password: 
+    <input @bind="s_Password"/>&nbsp;
+</p>
+<button @onclick="attemptLogin">Login</button> 
+@LoginMessage
+
+
+
+@code
+{
+    FirestoreDb db = FirestoreDb.Create("pockettravel-68eb7");
+
+    string LoginMessage = string.Empty;
+    string s_Email = string.Empty;
+    string s_Password = string.Empty;
+
+    public class c_Users
+    {
+        public string s_id {get; set;}
+        public string s_email { get; set;}
+        public string s_password { get; set;}
+    }
+
+    private IEnumerable<c_Users> IE_users = Array.Empty<c_Users>();
+
+
+    private async Task attemptLogin()
+    {
+        CollectionReference cr_Users = db.Collection("Users");
+        QuerySnapshot qs_userData = await cr_Users.GetSnapshotAsync();
+        var lst = new List<c_Users>();
+            foreach(var doc in qs_userData.Documents)
+            {
+                lst.Add(new c_Users {s_id = doc.Id, s_email = doc.GetValue<string>("email"), s_password = doc.GetValue<string>("password")});
+            }
+        IE_users = lst;
+
+        foreach(var user in IE_users)
+        {
+            if(user.s_email == s_Email && user.s_password == s_Password)
+            {
+                LoginMessage = "Succesfully Logged In!";
+                DocumentReference dr_User = cr_Users.Document(user.s_id);
+                DocumentSnapshot ds_userData = await dr_User.GetSnapshotAsync();
+                c_currentUser.SetUser(s_Email,s_Password, ds_userData.GetValue<string>("fullName"), ds_userData.GetValue<string>("phoneNumber"));
+                LoginMessage = "Welcome back, " + c_currentUser.fullName + "!";
+                return;
+            }
+        }
+        LoginMessage="Invalid Email or Password";
+    }
+
+
+
+
+
+    
+
+
+
+}
