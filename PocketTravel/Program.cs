@@ -1,5 +1,7 @@
 using PocketTravel.Components;
 
+string credentialPath = @"..\..\pockettravel-68eb7-firebase-adminsdk-k262x-29a33b24b6.json";
+Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", credentialPath);
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
