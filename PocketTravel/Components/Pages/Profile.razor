@@ -3,17 +3,98 @@
 
 <PageTitle>Profile</PageTitle>
 
-<h1>Profile</h1>
+<main>
+    <h1 class="welcome">Hello User!</h1>
+    <div class="grid">
+        <div class="left-block">
+            <div class="section-block">
+                <div class="user-info">
+                    <p>Username:</p>
+                    <p>Full Name:</p>
+                    <p>email:</p>
+                    <p>phone number:</p>
+                </div>
+            </div>
+        </div>
+        <div class="right-block">
+            <div class="section-block">
+                <h2 class="section-title">Recently Viewed Cities</h2>
+                <div class="city">
+                    <div class="pin-icon"/>
+                    <div class="city-name"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="left-block">
+        <div class="section-block">
+            <h2 class="section-title">Next City to Visit</h2>
+            <div class="city">
+                <div class="city-img"/>
+                <div class="pin-icon"/>
+                <div class="city-name"/>
+            </div>
+        </div>
+    </div>
+</main>
 
-<p role="status">Current count: @currentCount</p>
-
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<style>
+    .welcome {
+        font-family: 'Abril Fatface';
+    }
+    .grid {
+        display: flex;
+    }
+    .left-block {
+        width: 50%;
+        float: left;
+        clear: both;
+        padding: 20px;
+        margin: 30px 30px 30px 30px;
+        border-radius: 5px;
+    }
+    .right-block { 
+        width: 50%;
+        padding: 20px;
+        float: right;
+        clear: both;
+        margin: 30px 30px 30px 30px;
+        border-radius: 5px;
+    }
+    .section-block {
+        background-color: #96C5A7;
+        border-radius: 5px;
+    }
+    .user-info {
+        padding: 20px;
+    }
+    .left-block {
+        width: 50%;
+        float: left;
+        clear: both;
+        margin: 20px;
+        padding: 20px;
+        margin: 30px 30px 30px 30px;
+        border-radius: 5px;
+    }
+    .section-title {
+        font-family: 'Abril Fatface';
+        padding: 20px 0px 0px 25px;       
+    }
+    .city {
+        align-content: center;
+    }
+    .city-img {
+        width: 250px;
+        height: 200px;
+        border-color: black;
+        border-radius: 5px;
+    }
+    .pin-icon {
+        <img src: '/images/map-marker.svg';
+    }
+</style>
 
 @code {
-    private int currentCount = 0;
 
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
 }
