@@ -2,6 +2,98 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<main>
+    <div class="img-header"/>
+    <br>
+    <div class="left-block">
+        <div class="suitcase-img"/>
+    </div>
+    <div class="right-block">
+        <p>
+            We're here to assist you in your travels abroad as you
+            explore countries that may be different than the country
+            that you're from!
+        </p>
+    </div>
+    <div class="left-block">
+        <p>
+            Join us as we help prepare and guide you through the local 
+            weather, languages barries, currency issues and more that 
+            you can run into while abroad.
+        </p>
+    </div>
+    <br>
+    <div class="rec-cities">
+        <h2 class="rec-cities-title">Recommended Cities</h2>
+        <div class="city">
+            <div class="city-img"/>
+            <div class="pin-icon"/>
+            <div class="city-name"/>
+        </div>
+    </div>
+    <br>
+</main>
 
-Welcome to your new app.
+<style>
+    .img-header {
+        background-image: url('images/img_header.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+        border-radius: 6px;
+    }
+    .suitcase-img {
+        background-image: url('images/suitcase.png');
+        width: 200px;
+        background-size: fill;
+        background-repeat: no-repeat;
+        /*float: left;*/
+        clear: both;
+    }
+    .right-block { 
+        width: 50%;
+        padding: 20px;
+        float: right;
+        margin: 30px 30px 30px 30px;
+        border-radius: 6px;
+        align-content: center;
+    }
+    .left-block {
+        width: 50%;
+        float: left;
+        clear: both;
+        margin: 20px;
+        padding: 20px;
+        margin: 30px 30px 30px 30px;
+        border-radius: 5px;
+    }
+    .rec-cities{
+        clear: both;
+        background-color: #96C5A7;
+        border-radius: 5px;
+    }
+    .rec-cities-title{ 
+        font-family: 'Abril Fatface';
+        padding-left: 25px;
+    }
+    .city {
+        align-content: center;
+    }
+    .city-img {
+        width: 250px;
+        height: 200px;
+        border-color: black;
+        border-radius: 5px;
+    }
+    .pin-icon {
+        <img src: '/images/map-marker.svg';
+    }
+</style>
+
+@code {
+    @*
+        call from database:
+        - city image
+        - city location
+    *@
+}
