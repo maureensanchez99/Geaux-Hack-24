@@ -4,9 +4,13 @@ string credentialPath = @"..\..\pockettravel-68eb7-firebase-adminsdk-k262x-29a33
 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", credentialPath);
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddScoped<c_currentUser>();
 
 var app = builder.Build();
 
