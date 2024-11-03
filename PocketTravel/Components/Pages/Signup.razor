@@ -1,0 +1,73 @@
+@using Google.Cloud.Firestore;
+@rendermode InteractiveServer
+
+@page "/signup"
+
+
+<PageTitle>SignUp</PageTitle>
+
+<p>
+     Email: 
+    <input @bind="s_newEmail"/>&nbsp;
+</p>
+<p>
+    Password: 
+    <input @bind="s_newPassword"/>&nbsp;
+</p>
+<p>
+     Full Name: 
+    <input @bind="s_newFullName"/>&nbsp;
+</p>
+<p>
+     Phone Number: 
+    <input @bind="s_newPhoneNumber"/>&nbsp;
+</p>
+<button @onclick="addNewUser">Sign Up</button>
+@SignUpMessage
+
+@code {
+
+    FirestoreDb db = FirestoreDb.Create("pockettravel-68eb7");
+
+     public class c_Users 
+    {
+        public string s_id {get; set;}
+        public string s_email { get; set;}
+        public string s_password { get; set;}
+        public string s_name {get; set;}
+        public string s_phone {get; set;}
+    }
+
+    string s_newEmail = string.Empty;
+    string s_newPassword = string.Empty;
+    string s_newFullName = string.Empty;
+    string s_newPhoneNumber = string.Empty;
+    string SignUpMessage = string.Empty;
+
+    private IEnumerable<c_Users> iE_users = Array.Empty<c_Users>();
+    private async Task addNewUser()
+    {
+        CollectionReference cr_users = db.Collection("Users");
+        QuerySnapshot qs_users = await cr_users.GetSnapshotAsync();
+
+        var lst = new List<c_Users>();
+            foreach (var doc in qs_users.Documents)
+            {
+                lst.Add(new c_Users {s_id = doc.Id, s_email = doc.GetValue<string>("email"), s_password = doc.GetValue<string>("password"), s_name = doc.GetValue<string>("fullName"), s_phone = doc.GetValue<string>("phoneNumber")});
+            }
+        iE_users = lst;
+    
+        foreach(var user in iE_users)
+        {
+            if(s_newEmail == user.s_email)
+            {
+                SignUpMessage = "Sorry, there is already an account with that email";
+                return;
+            }
+        }
+
+        await cr_users.AddAsync(new {email = s_newEmail, password = s_newPassword, phoneNumber = s_newPhoneNumber, fullName = s_newFullName});
+        SignUpMessage = "Successfully created the account!";
+
+    }
+}
