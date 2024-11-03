@@ -1,25 +1,38 @@
 @page "/norway"
 @rendermode InteractiveServer
+@using Google.Cloud.Firestore;
 
-<PageTitle>Norway</PageTitle>
+<PageTitle>DPRK</PageTitle>
 
 <div class="split">
     <div class="left-section">
-        <h1>Country: Norway</h1>
-        <h2>City: Tromso</h2>
+        <h1>Country: @country.s_name</h1>
+        <h2>City: @country.s_city</h2>
     </div>
     <div class="right-section">
-        <div class="flag-img"/>
+        <div class="city-img" style="background-image: url('@country.s_cityPath')"/>
+        <div class="flag-img" style="background-image: url('@country.s_flagPath')"/>
     </div>
-</div>
+</div>          
 
 <div class="breakdown">
     <h1 class="bd-title">Breakdown</h1>
     <div class="info">
         <h3 class="weather"> Weather</h3>
+            <ul>
+                <li>Spring: @country.s_spring </li>
+                <li>Summer: @country.s_summer </li>
+                <li>Fall: @country.s_fall </li>
+                <li>Winter: @country.s_winter </li>
+            </ul>
         <h3 class="languages">Languages</h3>
-        <h3 class="finances">Finances</h3>
-        <h3 class="legal-tips">Legal Tips</h3>
+            <ol>
+               <li>@country.s_1L</li> 
+               <li>@country.s_2L</li> 
+               <li>@country.s_3L</li> 
+            </ol>
+        <h3 class="finances">Currency: @country.s_currency </h3>
+        <h3 class="legal-tips">Legal Tips :@country.s_tip </h3>
     </div>
 </div>
 
@@ -49,7 +62,8 @@
         height: 200px;
         background-size: cover;
         background-position: center;
-        background-image: url('images/norway_flag.webp');
+    using System.Reflection.Metadata;
+        background-image: url('images/dprk_flag.png');
     }
     .breakdown {
         clear: both;
@@ -63,8 +77,91 @@
     .info {
         padding-left: 30px;
     }
+    .city-img {
+        width: 250px;
+        height: 200px;
+        border-radius: 5px;
+        background-size: cover;
+        background-position: center;
+        background-image: url('images/pyongyang.jpg');
+        margin-bottom: 20px;
+        }
 </style>
 
 @code {
+    FirestoreDb db = FirestoreDb.Create("pockettravel-68eb7");
 
+ public class c_countries
+    {
+        public string s_id {get;set;} = string.Empty;
+        
+        public string s_name {get;set;} = string.Empty;
+         
+        public string s_cityPath {get;set;}
+        public string s_flagPath {get;set;}
+        public string s_page {get;set;}
+        public string s_city {get;set;}
+        public string s_spring {get;set;}
+        public string s_summer {get;set;}
+        public string s_fall {get;set;}
+        public string s_winter {get;set;}
+        public string s_1L {get;set;}
+        public string s_2L {get;set;}
+        public string s_3L {get;set;}
+        public string s_currency {get;set;}
+        public string s_tip {get;set;}
+        
+
+    }
+ 
+    private c_countries country = new c_countries{s_name = ""};
+    
+     protected override async Task OnInitializedAsync()
+    {
+        country = await refreshList();
+    }
+
+    private async Task<c_countries> refreshList()
+    {
+        CollectionReference cr_countries = db.Collection("Countries");
+        DocumentReference dr_country = cr_countries.Document("4");
+        DocumentSnapshot ds_countryData = await dr_country.GetSnapshotAsync();
+
+    
+        // Retrieve weather data
+        DocumentReference dr_countryWeather = cr_countries.Document("0").Collection("weather").Document("0");
+        DocumentSnapshot ds_countryWeatherData = await dr_countryWeather.GetSnapshotAsync();
+
+        // Retrieve languages
+        DocumentReference dr_countryLanguage = cr_countries.Document("0").Collection("languages").Document("0");
+        DocumentSnapshot ds_countryLanguageData = await dr_countryLanguage.GetSnapshotAsync();
+
+        // Retrieve legal tips
+        DocumentReference dr_countryLegalTips = cr_countries.Document("0").Collection("legalTips").Document("0");
+        DocumentSnapshot ds_countryLegalTipsData = await dr_countryLegalTips.GetSnapshotAsync();
+    
+
+        country = new c_countries{
+            s_id = ds_countryData.Id,
+            
+            s_name = ds_countryData.GetValue<string>("name"),
+            
+            s_cityPath = ds_countryData.GetValue<string>("cityPath"),
+            s_flagPath = ds_countryData.GetValue<string>("flagPath"),
+            s_page = ds_countryData.GetValue<string>("page"),
+            s_city = ds_countryData.GetValue<string>("city"),
+            s_spring = ds_countryWeatherData.GetValue<string>("spring"),
+            s_summer = ds_countryWeatherData.GetValue<string>("summer"),
+            s_fall = ds_countryWeatherData.GetValue<string>("fall"),
+            s_winter = ds_countryWeatherData.GetValue<string>("winter"),
+            s_1L = ds_countryLanguageData.GetValue<string>("firstL"),
+            s_2L = ds_countryLanguageData.GetValue<string>("secondL"),
+            s_3L = ds_countryLanguageData.GetValue<string>("thirdL"),
+            s_currency = ds_countryData.GetValue<string>("currency"),
+            s_tip = ds_countryLegalTipsData.GetValue<string>("1")
+            };
+    return country;
+
+    
+    }
 }

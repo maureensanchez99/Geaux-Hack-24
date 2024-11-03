@@ -24,27 +24,19 @@
             </NavLink>
         </div>
 
-        <nav>
-    <div class="nav-item px-3">
-        @if (!c_currentUser.IsLoggedIn)
-        {
+        <div class="nav-item px-3">
             <NavLink class="nav-link" href="login">
                 <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Login
             </NavLink>
-        }
-        else
-        {
-            <span>adwadw</span>
-        }
-    </div>
-
-    @if (c_currentUser.IsLoggedIn)
-    {
-        <div class="nav-item px-3">
-            <span class="nav-link">Welcome, @c_currentUser.fullName!</span>
         </div>
-    }
-</nav>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="signup">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Signup
+            </NavLink>
+        </div>
+
+        
     </nav>
 </div>
 

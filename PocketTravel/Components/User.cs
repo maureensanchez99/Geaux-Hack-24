@@ -1,3 +1,5 @@
+
+
 public class c_currentUser
 {
     public string Id {get; set;}
@@ -11,7 +13,7 @@ public class c_currentUser
 
     public bool IsLoggedIn {get; set;} = false;
 
-    public void SetUser(string id,string email, string fullname, string phonenumber, string username)
+public void SetUser(string id,string email, string fullname, string phonenumber, string username)    
     {
         Id = id;
         Email = email;
@@ -21,13 +23,6 @@ public class c_currentUser
         IsLoggedIn = true;
     }
 
-    public void ClearUser()
-    {
-        Id = string.Empty;
-        Email = string.Empty;
-        phoneNumber = string.Empty;
-        fullName = string.Empty;
-        UserName = string.Empty;
-        IsLoggedIn = false;
-    }
+    
 }
+
