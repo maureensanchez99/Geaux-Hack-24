@@ -1,7 +1,137 @@
 ﻿@page "/"
+@using Google.Cloud.Firestore
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<main>
+    <div class="img-header"/>
+    <br>
+    <div class="left-block">
+        <div class="suitcase-img"/>
+    </div>
+    <div class="right-block">
+        <p>
+            We're here to assist you in your travels abroad as you
+            explore countries that may be different than the country
+            that you're from!
+        </p>
+    </div>
+    <div class="left-block">
+        <p>
+            Join us as we help prepare and guide you through the local 
+            weather, languages barriers, currency exchange and more that 
+            you can run into while abroad.
+        </p>
+    </div>
+    <br>
+    <div class="rec-cities">
+        <h2 class="rec-cities-title">Recommended Cities</h2>
+        <div class="city">
+            @foreach(var country in IE_countries)
+            {
+                <a href=@country.s_page>
+                <div class="city-img" style="background-image: url('@country.s_cityPath')"/>
+            </a>
+            <div class="pin-icon"/>
+            <div class="city-name"/>
+            }
+           
+        </div>
+    </div>
+    <br>
+</main>
 
-Welcome to your new app.
+<style>
+    .img-header {
+        background-image: url('images/img_header.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+        border-radius: 6px;
+    }
+    .suitcase-img {
+        background-image: url('images/suitcase.png');
+        width: 200px;
+        background-size: fill;
+        background-repeat: no-repeat;
+        /*float: left;*/
+        clear: both;
+    }
+    .right-block { 
+        width: 50%;
+        padding: 20px;
+        float: right;
+        margin: 30px 30px 30px 30px;
+        border-radius: 5px;
+        align-content: center;
+    }
+    .left-block {
+        width: 50%;
+        float: left;
+        clear: both;
+        padding: 20px;
+        margin: 30px 30px 30px 30px;
+        border-radius: 5px;
+    }
+    .rec-cities{
+        clear: both;
+        background-color: #96C5A7;
+        border-radius: 5px;
+    }
+    .rec-cities-title{ 
+        font-family: 'Abril Fatface';
+        padding: 25px 0px 0px 25px;
+    }
+    .city {
+        align-content: center;
+        padding: 20px 0px 0px 30px;
+    }
+    .city-img {
+        width: 250px;
+        height: 200px;
+        border-radius: 5px;
+        background-size: cover;
+        background-position: center;
+        background-image: url('images/pyongyang.jpg');
+        margin-bottom: 20px;
+    }
+    .pin-icon {
+        <img src: '/images/map-marker.svg';
+    }
+</style>
+
+@code {
+    FirestoreDb db = FirestoreDb.Create("pockettravel-68eb7");
+
+
+    public class c_countries
+    {
+        public string s_id {get;set;}
+        public string s_cityPath {get;set;}
+        public string s_page {get;set;}
+
+    }
+    private IEnumerable<c_countries> IE_countries = Array.Empty<c_countries>();
+    
+     protected override async Task OnInitializedAsync()
+    {
+        await refreshList();
+    }
+
+    private async Task refreshList()
+    {
+        CollectionReference cr_countries = db.Collection("Countries");
+        QuerySnapshot qs_countries = await cr_countries.GetSnapshotAsync();
+
+        var lst = new List<c_countries>();
+            foreach (var country in qs_countries.Documents)
+            {
+                lst.Add(new c_countries{s_id = country.Id, s_cityPath = country.GetValue<string>("cityPath"), s_page = country.GetValue<string>("page")});
+            }
+        IE_countries = lst;
+
+    
+    }
+
+
+}

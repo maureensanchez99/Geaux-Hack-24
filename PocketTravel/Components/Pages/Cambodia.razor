@@ -1,0 +1,70 @@
+@page "/cambodia"
+@rendermode InteractiveServer
+
+<PageTitle>Cambodia</PageTitle>
+
+<div class="split">
+    <div class="left-section">
+        <h1>Country: Cambodia</h1>
+        <h2>City: Kang Siem Reap</h2>
+    </div>
+    <div class="right-section">
+        <div class="flag-img"/>
+    </div>
+</div>
+
+<div class="breakdown">
+    <h1 class="bd-title">Breakdown</h1>
+    <div class="info">
+        <h3 class="weather"> Weather</h3>
+        <h3 class="languages">Languages</h3>
+        <h3 class="finances">Finances</h3>
+        <h3 class="legal-tips">Legal Tips</h3>
+    </div>
+</div>
+
+<style>
+    .split {
+        display: flex;
+    }
+    .left-section {
+        font-family: 'Abril Fatface';
+        width: 45%;
+        float: left;
+        clear: both;
+        padding: 20px;
+        margin: 20px 20px 20px 20px;
+        border-radius: 5px;
+    }
+    .right-section {
+        width: 45%;
+        padding: 20px;
+        float: right;
+        clear: both;
+        margin: 20px 20px 20px 20px;
+        border-radius: 5px;
+    }
+    .flag-img {
+        width: 250px;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        background-image: url('images/cambodia_flag.png');
+    }
+    .breakdown {
+        clear: both;
+        background-color: #96C5A7;
+        border-radius: 5px;
+    }
+    .bd-title {
+        font-family: 'Abril Fatface';
+        padding: 25px 0px 0px 25px;        
+    }
+    .info {
+        padding-left: 30px;
+    }
+</style>
+
+@code {
+
+}

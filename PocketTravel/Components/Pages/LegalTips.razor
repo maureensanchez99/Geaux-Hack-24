@@ -1,5 +1,6 @@
-﻿@page "/counter"
+@page "/legaltips"
 @rendermode InteractiveServer
+@inject c_currentUser c_currentUser
 
 <PageTitle>Counter</PageTitle>
 
@@ -8,6 +9,9 @@
 <p role="status">Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<h3>Welcome, @c_currentUser.fullName</h3>
+
 
 @code {
     private int currentCount = 0;
